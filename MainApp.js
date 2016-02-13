@@ -12,10 +12,6 @@ var {
   Component
 } = React;
 
-var REQUEST_URL = 'http://localhost:3000/api/v1/today';
-
-var EventList             = require('./EventList');
-var Footer             = require('./Footer');
 var WelcomePage             = require('./WelcomePage');
 
 class MainApp extends Component {
@@ -26,8 +22,7 @@ class MainApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <WelcomePage navigator={this.props.navigator} />
-        <Footer navigator={this.props.navigator} />
+        <WelcomePage navigator={this.props.navigator} />        
       </View>
     );
   }

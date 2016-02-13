@@ -18,8 +18,6 @@ var Dimensions = require('Dimensions');
 var REQUEST_URL = 'http://localhost:3000/api/v1/today';
 let things = []
 
-var EventForm             = require('./EventForm');
-var EventList             = require('./EventList');
 var MainApp            = require('./MainApp');
 var Footer            = require('./Footer.js');
 
@@ -31,14 +29,14 @@ var styles = StyleSheet.create({
 });
 
 
-class whattodoNative extends Component {
+class biliNative extends Component {
   constructor(props) {
     super(props);    
     component = this;
     this.state = {
     }
   }
-
+  // want to hide nav only at bottom
   render() {
     return (
       <View style={styles.container}>
@@ -48,7 +46,7 @@ class whattodoNative extends Component {
         tintColor='#fff'
         style={styles.container}
         initialRoute={{
-          title: 'WhatToDo',
+          title: 'Bili',
           component: MainApp
         }}/>     
       </View>
@@ -77,4 +75,4 @@ var styles = React.StyleSheet.create({
   }
 })
 
-AppRegistry.registerComponent('whattodoNative', () => whattodoNative);
+AppRegistry.registerComponent('biliNative', () => biliNative);

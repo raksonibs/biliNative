@@ -12,9 +12,9 @@ var {
   Component
 } = React;
 
-var REQUEST_URL = 'http://localhost:3000/api/v1/today';
+var REQUEST_URL = 'http://localhost:3000/posts';
 
-var EventList             = require('./EventList');
+var EventList = require('./EventList');
 
 class WelcomePage extends Component {
   constructor(props) {    
