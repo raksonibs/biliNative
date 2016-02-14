@@ -12,7 +12,8 @@ var {
   Component
 } = React;
 
-var WelcomePage             = require('./WelcomePage');
+var WelcomePage = require('./WelcomePage');
+var Footer = require('./Footer');
 
 class MainApp extends Component {
   constructor(props) {    
@@ -22,7 +23,8 @@ class MainApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <WelcomePage navigator={this.props.navigator} />        
+        <WelcomePage navigator={this.props.navigator} />
+        <Footer />
       </View>
     );
   }

@@ -26,7 +26,7 @@ class WelcomePage extends Component {
   }
 
   componentDidMount() {
-    this._executeQuery(); 
+    // this._executeQuery(); 
   }
 
   _handleResponse(response) {
@@ -64,23 +64,9 @@ class WelcomePage extends Component {
   }
    
   render() {
-
-    var spinner = this.state.isLoading ?
-      ( <ActivityIndicatorIOS
-          hidden='true'
-          size='large'/> ) :
-      ( <TouchableHighlight style={styles.button}
-          underlayColor='#99d9f4'
-          onPress={this.onEventPressed.bind(this)}
-          >
-          <Text style={styles.buttonText}>Explore All</Text>
-        </TouchableHighlight> );
     return (
       <View style={styles.container}>
-        <Text style={styles.header}> WhatToDo </Text>    
-        <Text style={styles.text}> posts for Toronto, Canada </Text>
-        {spinner}
-        <Text style={styles.description}>{this.state.message}</Text>
+               
       </View>
     );
   }
