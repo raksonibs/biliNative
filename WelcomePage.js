@@ -14,7 +14,7 @@ var {
 
 var REQUEST_URL = 'http://localhost:3000/posts';
 
-var EventList = require('./EventList');
+var PostList = require('./PostList');
 
 class WelcomePage extends Component {
   constructor(props) {    
@@ -30,11 +30,11 @@ class WelcomePage extends Component {
   }
 
   _handleResponse(response) {
-    if (response.events.length > 0) {
+    if (response.length > 0) {
       this.props.navigator.push({
-        title: 'Events',
-        component: EventList,
-        passProps: {events: response.events}
+        title: 'posts',
+        component: PostList,
+        passProps: {posts: response}
       });
     } else {
       this.setState({ message: 'Not recognized; please try again.'});
@@ -78,7 +78,7 @@ class WelcomePage extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.header}> WhatToDo </Text>    
-        <Text style={styles.text}> Events for Toronto, Canada </Text>
+        <Text style={styles.text}> posts for Toronto, Canada </Text>
         {spinner}
         <Text style={styles.description}>{this.state.message}</Text>
       </View>
@@ -99,8 +99,7 @@ var styles = StyleSheet.create({
   header: {
     fontSize: 25,
     margin: 5,
-    color: 'white',
-    fontFamily: 'Roboto-Bold'
+    color: 'white'
   },
   container: {
     padding: 30,

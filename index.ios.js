@@ -19,7 +19,6 @@ var REQUEST_URL = 'http://localhost:3000/api/v1/today';
 let things = []
 
 var MainApp            = require('./MainApp');
-var Footer            = require('./Footer.js');
 
 var styles = StyleSheet.create({
   app: {

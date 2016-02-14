@@ -1,5 +1,6 @@
 var React = require('react-native');
-import EventShow from './Event'
+import PostShow from './PostShow'
+
 var {
   ScrollView,
   StyleSheet,
@@ -12,7 +13,6 @@ var {
   Text
 } = React;
 
-let events = [];
 let component;
 
 var styles = StyleSheet.create({
@@ -49,45 +49,45 @@ var styles = StyleSheet.create({
 });
 
 class PostList extends React.Component {
-    constructor(props) {
-      super(props);
-      component = this;
-      var dataSource = new ListView.DataSource(
-      {rowHasChanged: (r1, r2) => r1.id !== r2.id});
-      this.state = {
-        dataSource: dataSource.cloneWithRows(this.props.events)
-      };
-    }
+  constructor(props) {
+    super(props);
+    component = this;
+    var dataSource = new ListView.DataSource(
+    {rowHasChanged: (r1, r2) => r1.id !== r2.id});
+    this.state = {
+      dataSource: dataSource.cloneWithRows(this.props.posts)
+    };
+  }
 
-    rowPressed(eventId) {
-      var event = this.props.events.filter(event => event.uuid === eventId)[0];
-      
-      this.props.navigator.push({
-        title: "Event",
-        component: EventShow,
-        passProps: {event: event}
-      });
-    }
+  rowPressed(postId) {
+    var post = this.props.posts.filter(post => post.uuid === postId)[0];
+    
+    this.props.navigator.push({
+      title: "post",
+      component: PostShow,
+      passProps: {post: post}
+    });
+  }
 
-    renderRow(rowData, sectionID, rowID) {
+  renderRow(rowData, sectionID, rowID) {
 
-      return (
-        <TouchableHighlight onPress={() => this.rowPressed(rowData.uuid)}
-          underlayColor='#dddddd'>
-          <View>
-            <View style={styles.rowContainer}>
-              <Image style={styles.thumb} source={{ uri: rowData.image }} />
-              <View style={styles.textContainer}>
-                <Text style={styles.price}>{rowData.name}</Text>
-                <Text style={styles.title} 
-                      numberOfLines={1}>{rowData.location}</Text>
-                <Text style={styles.title} 
-                      numberOfLines={1}>{rowData.price}</Text>
-              </View>
+    return (
+      <TouchableHighlight onPress={() => this.rowPressed(rowData.uuid)}
+        underlayColor='#dddddd'>
+        <View>
+          <View style={styles.rowContainer}>
+            <Image style={styles.thumb} source={{ uri: rowData.image }} />
+            <View style={styles.textContainer}>
+              <Text style={styles.price}>{rowData.name}</Text>
+              <Text style={styles.title} 
+                    numberOfLines={1}>{rowData.location}</Text>
+              <Text style={styles.title} 
+                    numberOfLines={1}>{rowData.price}</Text>
             </View>
-            <View style={styles.separator}/>
           </View>
-        </TouchableHighlight>
+          <View style={styles.separator}/>
+        </View>
+      </TouchableHighlight>
     );
   }
 
