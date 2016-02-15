@@ -13,12 +13,29 @@ var {
   Component
 } = React;
 
+import {
+  MKIconToggle,
+  MKSwitch,
+  MKRadioButton,
+  MKCheckbox,
+  MKColor,
+  getTheme,
+  setTheme,
+} from 'react-native-material-kit';
+
+// customize the material design theme
+setTheme({
+  primaryColor: MKColor.Purple,
+  primaryColorRGB: MKColor.RGBPurple,
+  accentColor: MKColor.Amber,
+});
+
 var Dimensions = require('Dimensions');
 
 var REQUEST_URL = 'http://localhost:3000/api/v1/today';
 let things = []
 
-var MainApp            = require('./MainApp');
+var MainApp = require('./MainApp');
 
 var styles = StyleSheet.create({
   app: {

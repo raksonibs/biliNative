@@ -10,7 +10,8 @@ var {
   ActivityIndicatorIOS,
   Image,
   Component,
-  NavigatorIOS
+  NavigatorIOS,
+  TouchableOpacity
 } = React;
 
 import {
@@ -18,10 +19,101 @@ import {
   MKSwitch,
   MKRadioButton,
   MKCheckbox,
-  MKColor,
   getTheme,
   setTheme,
+  MKButton,
+  MKColor
 } from 'react-native-material-kit';
+
+var styles = StyleSheet.create({
+  description: {
+    marginBottom: 20,
+    fontSize: 18,
+    textAlign: 'center',
+    color: 'white'
+  },
+  text: {
+    color: 'white'
+  },
+  header: {
+    fontSize: 25,
+    margin: 5,
+    color: 'white',
+    fontFamily: 'Roboto-Bold'
+  },
+  container: {
+    padding: 30,
+    marginTop: 65,
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    flex: 1
+  },
+  flowRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'stretch'
+  },
+  image: {
+    width: 217,
+    height: 138
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    flexDirection: 'row',
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
+  buttonText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  fab: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+  },
+});
+
+const ColoredRaisedButton = MKButton.coloredButton()
+  .withText('BUTTON')
+  .withOnPress(() => {
+    console.log("Hi, it's a colored button!");
+  })
+  .build();
+const AccentColoredRaisedButton = MKButton.accentColoredButton()
+  .build();
+const PlainRaisedButton = MKButton.button()
+  .withText('BOOKS')
+  .build();
+const FlatButton = MKButton.flatButton()
+  .withText('BUTTON')
+  .build();
+const ColoredFlatButton = MKButton.coloredFlatButton()
+  .withText('BUTTON')
+  .build();
+const AccentColoredFlatButton = MKButton.accentColoredFlatButton()
+  .withText('BUTTON')
+  .build();
+const ColoredFab = MKButton.coloredFab()
+  .withStyle(styles.fab)
+  .build();
+const AccentColoredFab = MKButton.accentColoredFab()
+  .withStyle(styles.fab)
+  .build();
+const PlainFab = MKButton.plainFab()
+  .withStyle(styles.fab)
+  .build();
 
 var REQUEST_URL = 'http://localhost:3000/posts/';
 
@@ -126,94 +218,15 @@ class Footer extends Component {
 
     return (
       <View style={styles.container}>
-        {spinner}
-
-        <MKRadioButton
-          checked={true}
-          group={this.radioGroup}
-        />
-        <TouchableHighlight style={styles.button}
-          underlayColor='#99d9f4'
-          onPress={this.handleButtonPress.bind(this, 'books')}
-          type='book'
-          >
-          <Text style={styles.buttonText}>Books</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.button}
-          underlayColor='#99d9f4'
-          onPress={this.handleButtonPress.bind(this, 'articles')}
-          type='article'
-          >
-          <Text style={styles.buttonText}>Articles</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.button}
-          underlayColor='#99d9f4'
-          onPress={this.handleButtonPress.bind(this, 'music')}
-          type='music'
-          >
-          <Text style={styles.buttonText}>Music</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.button}
-          underlayColor='#99d9f4'
-          onPress={this.handleButtonPress.bind(this, 'settings')}
-          type='setting'
-          >
-          <Text style={styles.buttonText}>Settings</Text>
-        </TouchableHighlight>
+        {spinner}  
+        <PlainRaisedButton onPress={this.handleButtonPress.bind(this, 'books')}/>
+        <PlainRaisedButton onPress={this.handleButtonPress.bind(this, 'articles')}/>
+        <PlainRaisedButton onPress={this.handleButtonPress.bind(this, 'music')}/>
+        <PlainRaisedButton onPress={this.handleButtonPress.bind(this, 'settings')}/>
         <Text style={styles.description}>{this.state.message}</Text>
       </View>
     );
   }
 }
-
-var styles = StyleSheet.create({
-  description: {
-    marginBottom: 20,
-    fontSize: 18,
-    textAlign: 'center',
-    color: 'white'
-  },
-  text: {
-    color: 'white'
-  },
-  header: {
-    fontSize: 25,
-    margin: 5,
-    color: 'white',
-    fontFamily: 'Roboto-Bold'
-  },
-  container: {
-    padding: 30,
-    marginTop: 65,
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    flex: 1
-  },
-  flowRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'stretch'
-  },
-  image: {
-    width: 217,
-    height: 138
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    flexDirection: 'row',
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-});
 
 module.exports = Footer;
