@@ -13,6 +13,16 @@ var {
   NavigatorIOS
 } = React;
 
+import {
+  MKIconToggle,
+  MKSwitch,
+  MKRadioButton,
+  MKCheckbox,
+  MKColor,
+  getTheme,
+  setTheme,
+} from 'react-native-material-kit';
+
 var REQUEST_URL = 'http://localhost:3000/posts/';
 
 var Settings = require('./Settings');
@@ -117,6 +127,11 @@ class Footer extends Component {
     return (
       <View style={styles.container}>
         {spinner}
+
+        <MKRadioButton
+          checked={true}
+          group={this.radioGroup}
+        />
         <TouchableHighlight style={styles.button}
           underlayColor='#99d9f4'
           onPress={this.handleButtonPress.bind(this, 'books')}
