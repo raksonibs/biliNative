@@ -30,7 +30,7 @@ class PostPage extends React.Component {
         <View>
           {
             this.props.posts.map((post, index) => {
-              return <InlinePost post={post} navigator={this.props.navigator} />
+              return <InlinePost key={index} post={post} navigator={this.props.navigator} />
             })
           }
         </View>

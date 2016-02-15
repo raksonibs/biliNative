@@ -14,6 +14,8 @@ var {
 
 let screenHeight = Dimensions.get('window').height;
 
+import PostShow from './PostShow'
+
 class InlinePost extends React.Component {
   constructor(props) {
     super(props)
@@ -23,11 +25,24 @@ class InlinePost extends React.Component {
     this.props.navigator.pop();
   }
 
+  handleButtonPress() {
+    this.props.navigator.push({
+      title: "Post",
+      component: PostShow,
+      passProps: {navigator: this.props.navigator, post: this.props.post}
+    });
+  }
+
   render() {
     return (
       <View style={styles.thing}>
-       <Text>{this.props.post.english_text}</Text>
-       <Text>{this.props.post.spanish_text}</Text>
+       <TouchableHighlight style={styles.button}
+          underlayColor='#99d9f4'
+          onPress={this.handleButtonPress.bind(this)}
+          type='music'
+          >
+          <Text style={styles.buttonText}>{this.props.post.english_text}</Text>
+        </TouchableHighlight>
       </View>
     );
   }

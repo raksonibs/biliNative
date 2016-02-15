@@ -26,12 +26,13 @@ class PostShow extends React.Component {
   render() {
     return (
       <View style={styles.thing}>
-        <Text>Event Show</Text>
         <TouchableHighlight
           onPress={this.goBack.bind(this)}
         >
           <Text style={styles.buttonText}>Go Back!</Text>
         </TouchableHighlight>
+        <Text>{this.props.post.english_text}</Text>
+        <Text>{this.props.post.spanish_text}</Text>
       </View>
     );
   }
