@@ -41,7 +41,7 @@ class InlinePost extends React.Component {
           onPress={this.handleButtonPress.bind(this)}
           type='music'
           >
-          <Text style={styles.buttonText}>{this.props.post.english_text}</Text>
+          <Text style={styles.buttonText}>{this.props.post.title}</Text>
         </TouchableHighlight>
       </View>
     );

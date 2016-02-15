@@ -171,7 +171,7 @@ var styles = StyleSheet.create({
     padding: 30,
     marginTop: 65,
     alignItems: 'center',
-    backgroundColor: '#BA55D3',
+    backgroundColor: '#fff',
     flex: 1
   },
   flowRight: {
