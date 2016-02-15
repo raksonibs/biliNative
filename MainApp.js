@@ -24,7 +24,7 @@ class MainApp extends Component {
     return (
       <View style={styles.container}>
         <WelcomePage navigator={this.props.navigator} />
-        <Footer />
+        <Footer navigator={this.props.navigator} />
       </View>
     );
   }

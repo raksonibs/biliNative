@@ -13,21 +13,19 @@ var {
   NavigatorIOS
 } = React;
 
-var REQUEST_URL = 'http://localhost:3000/api/v1/today';
+var REQUEST_URL = 'http://localhost:3000/posts/';
 
 var Settings = require('./Settings');
 var Music = require('./Music');
 var Books = require('./Books');
 var Articles = require('./Articles');
 
-
 class Footer extends Component {
   constructor(props) {    
     super(props);
     this.state = {
-      money: '',
-      category: '',
-      location: ''
+      isLoading: false,
+      message: ''
     }
   }
 
@@ -35,78 +33,121 @@ class Footer extends Component {
    
   }
 
-  _handleResponse(response) {
-    if (response.events.length > 0) {
-      this.props.navigator.push({
-        title: 'Events',
-        component: EventList,
-        passProps: {events: response.events}
-      });
+  _onMusicPressed(response) {
+    this.props.navigator.push({
+      title: "Music",
+      component: Music,
+      passProps: {navigator: this.props.navigator, posts: response}
+    });
+  }
+
+  _onBooksPressed(response) {
+    this.props.navigator.push({
+      title: "Books",
+      component: Books,
+      passProps: {navigator: this.props.navigator, posts: response}
+    });
+  }
+
+  _onArticlesPressed(response) {
+    this.props.navigator.push({
+      title: "Articles",
+      component: Articles,
+      passProps: {navigator: this.props.navigator, posts: response}
+    });
+  }
+
+  _onSettingsPressed(response) {
+    this.props.navigator.push({
+      title: "Settings",
+      component: Settings,
+      passProps: {navigator: this.props.navigator, posts: response}
+    });
+  }
+
+  _handleResponse(response, type) {
+    if (response.length > 0) {
+      switch (type) {
+        case "music":
+          this._onMusicPressed(response)
+          break;
+        case "books":
+          this._onBooksPressed(response)
+          break;
+        case "articles":
+          this._onArticlesPressed(response)
+          break;
+        case "setting":
+          this._onSettingPressed(response)
+          break;        
+      }
     } else {
       this.setState({ message: 'Not recognized; please try again.'});
     }
     this.setState({ isLoading: false , message: '' });
   }
 
-  onMusicPressed() {
-    this.props.navigator.push({
-      title: "Music",
-      component: Music,
-      passProps: {navigator: navigator}
-    });
+  _executeQuery(type) {
+    let typeChose = type  
+    console.log(REQUEST_URL+type);
+    fetch(REQUEST_URL+type)
+    .then(response => response.json())
+    .then(responseData => this._handleResponse(responseData, typeChose))
+    .catch(error => {      
+      console.log("error")
+      this.setState({
+        isLoading: false,
+        message: 'Something bad happened ' + error
+      });
+    })
   }
 
-  onBooksPressed() {
-    this.props.navigator.push({
-      title: "Books",
-      component: Books,
-      passProps: {navigator: navigator}
-    });
-  }
+  handleButtonPress(pressed) {
+    let type = pressed
+    this.setState({isLoading: true})
 
-  onArticlesPressed() {
-    this.props.navigator.push({
-      title: "Articles",
-      component: Articles,
-      passProps: {navigator: navigator}
-    });
-  }
-
-  onSettingsPressed() {
-    this.props.navigator.push({
-      title: "Settings",
-      component: Settings,
-      passProps: {navigator: navigator}
-    });
+    this._executeQuery(type)
   }
    
   render() {
+    var spinner = this.state.isLoading ?
+      ( <ActivityIndicatorIOS
+          hidden='true'
+          size='large'/> ) :
+      ( <View /> );
+
     return (
       <View style={styles.container}>
+        {spinner}
         <TouchableHighlight style={styles.button}
           underlayColor='#99d9f4'
-          onPress={this.onBooksPressed.bind(this)}
+          onPress={this.handleButtonPress.bind(this, 'books')}
+          type='book'
           >
           <Text style={styles.buttonText}>Books</Text>
         </TouchableHighlight>
         <TouchableHighlight style={styles.button}
           underlayColor='#99d9f4'
-          onPress={this.onArticlesPressed.bind(this)}
+          onPress={this.handleButtonPress.bind(this, 'articles')}
+          type='article'
           >
           <Text style={styles.buttonText}>Articles</Text>
         </TouchableHighlight>
         <TouchableHighlight style={styles.button}
           underlayColor='#99d9f4'
-          onPress={this.onMusicPressed.bind(this)}
+          onPress={this.handleButtonPress.bind(this, 'music')}
+          type='music'
           >
           <Text style={styles.buttonText}>Music</Text>
         </TouchableHighlight>
         <TouchableHighlight style={styles.button}
           underlayColor='#99d9f4'
-          onPress={this.onSettingsPressed.bind(this)}
+          onPress={this.handleButtonPress.bind(this, 'settings')}
+          type='setting'
           >
           <Text style={styles.buttonText}>Settings</Text>
         </TouchableHighlight>
+        <Text style={styles.description}>{this.state.message}</Text>
       </View>
     );
   }
