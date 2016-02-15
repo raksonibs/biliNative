@@ -16,9 +16,7 @@ var {
 var REQUEST_URL = 'http://localhost:3000/posts/';
 
 var Settings = require('./Settings');
-var Music = require('./Music');
-var Books = require('./Books');
-var Articles = require('./Articles');
+var PostPage = require('./PostPage');
 
 class Footer extends Component {
   constructor(props) {    
@@ -36,7 +34,7 @@ class Footer extends Component {
   _onMusicPressed(response) {
     this.props.navigator.push({
       title: "Music",
-      component: Music,
+      component: PostPage,
       passProps: {navigator: this.props.navigator, posts: response}
     });
   }
@@ -44,7 +42,7 @@ class Footer extends Component {
   _onBooksPressed(response) {
     this.props.navigator.push({
       title: "Books",
-      component: Books,
+      component: PostPage,
       passProps: {navigator: this.props.navigator, posts: response}
     });
   }
@@ -52,7 +50,7 @@ class Footer extends Component {
   _onArticlesPressed(response) {
     this.props.navigator.push({
       title: "Articles",
-      component: Articles,
+      component: PostPage,
       passProps: {navigator: this.props.navigator, posts: response}
     });
   }
@@ -60,7 +58,7 @@ class Footer extends Component {
   _onSettingsPressed(response) {
     this.props.navigator.push({
       title: "Settings",
-      component: Settings,
+      component: PostPage,
       passProps: {navigator: this.props.navigator, posts: response}
     });
   }
