@@ -8,7 +8,6 @@ var {
   Image,
   ScrollView,
   Navigator,
-  NavigatorIOS,
   TouchableHighlight,
   Component
 } = React;
@@ -40,7 +39,7 @@ var MainApp = require('./MainApp');
 var styles = StyleSheet.create({
   app: {
     flex: 1,
-    backgroundColor: '#85b16a'
+    backgroundColor: '#fff'
   }
 });
 
@@ -56,15 +55,26 @@ class biliNative extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavigatorIOS
-        barTintColor='#000'
-        titleTextColor='#fff'
-        tintColor='#fff'
-        style={styles.container}
-        initialRoute={{
-          title: 'Bili',
-          component: MainApp
-        }}/>     
+        <Navigator
+          initialRoute={{name: 'BiLi', index: 0}}
+          renderScene={(route, navigator) =>
+            <MainApp
+              name={route.name}
+              onForward={() => {
+                var nextIndex = route.index + 1;
+                navigator.push({
+                  name: 'Scene ' + nextIndex,
+                  index: nextIndex,
+                });
+              }}
+              onBack={() => {
+                if (route.index > 0) {
+                  navigator.pop();
+                }
+              }}
+            />
+          }
+        />  
       </View>
     );
   }
@@ -87,7 +97,7 @@ var styles = React.StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'stretch',
-    backgroundColor: '#BA55D3',
+    backgroundColor: '#fff',
   }
 })
 

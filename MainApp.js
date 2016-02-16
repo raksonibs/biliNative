@@ -8,6 +8,7 @@ var {
   View,
   TouchableHighlight,
   ActivityIndicatorIOS,
+  Navigator,
   Image,
   Component,
   ScrollView
