@@ -32,6 +32,14 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white'
   },
+  containerFooter: {
+    flex: 1, 
+    flexDirection: 'row'
+  },
+  itemFooter: {
+    flex: 0.25,
+    padding: 10
+  },
   text: {
     color: 'white'
   },
@@ -156,11 +164,12 @@ class Footer extends Component {
     });
   }
 
-  _onSettingsPressed(response) {
+  _onSettingsPressed() {
+    this.setState({isLoading: false})
     this.props.navigator.push({
       title: "Settings",
-      component: PostPage,
-      passProps: {navigator: this.props.navigator, posts: response}
+      component: Settings,
+      passProps: {navigator: this.props.navigator}
     });
   }
 
@@ -204,8 +213,11 @@ class Footer extends Component {
   handleButtonPress(pressed) {
     let type = pressed
     this.setState({isLoading: true})
-
-    this._executeQuery(type)
+    if (type !== "settings") {      
+      this._executeQuery(type)
+    } else {
+      this._onSettingsPressed()
+    }
   }
    
   render() {
@@ -216,12 +228,12 @@ class Footer extends Component {
       ( <View /> );
 
     return (
-      <View style={styles.container}>
+      <View style={styles.containerFooter}>
         {spinner}  
-        <AccentColoredFlatButtonBooks style={{flex: 0.2}} onPress={this.handleButtonPress.bind(this, 'books')}/>
-        <AccentColoredFlatButtonArticles style={{flex: 0.2}} onPress={this.handleButtonPress.bind(this, 'articles')}/>
-        <AccentColoredFlatButtonMusic style={{flex: 0.2}} onPress={this.handleButtonPress.bind(this, 'music')}/>
-        <AccentColoredFlatButtonSettings style={{flex: 0.2}} onPress={this.handleButtonPress.bind(this, 'settings')}/>
+        <AccentColoredFlatButtonBooks style={styles.itemFooter} onPress={this.handleButtonPress.bind(this, 'books')}/>
+        <AccentColoredFlatButtonArticles style={styles.itemFooter} onPress={this.handleButtonPress.bind(this, 'articles')}/>
+        <AccentColoredFlatButtonMusic style={styles.itemFooter} onPress={this.handleButtonPress.bind(this, 'music')}/>
+        <AccentColoredFlatButtonSettings style={styles.itemFooter} onPress={this.handleButtonPress.bind(this, 'settings')}/>
         <Text style={styles.description}>{this.state.message}</Text>
       </View>
     );
