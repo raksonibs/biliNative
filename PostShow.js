@@ -9,8 +9,10 @@ var {
   TouchableElement,
   StyleSheet,
   Dimensions,
-  Image
+  Image,
+  ScrollView
 } = React;
+
 
 let screenHeight = Dimensions.get('window').height;
 
@@ -25,14 +27,12 @@ class PostShow extends React.Component {
 
   render() {
     return (
-      <View style={styles.thing}>
-        <TouchableHighlight
-          onPress={this.goBack.bind(this)}
-        >
-          <Text style={styles.buttonText}>Go Back!</Text>
-        </TouchableHighlight>
-        <Text>{this.props.post.english_text}</Text>
-        <Text>{this.props.post.spanish_text}</Text>
+      <View style={styles.container}>
+        <ScrollView style={styles.thing}>        
+          <Text style={styles.title}>{this.props.post.title}</Text>
+          <Text>{this.props.post.english_text}</Text>
+          <Text>{this.props.post.spanish_text}</Text>
+        </ScrollView>
       </View>
     );
   }
@@ -41,13 +41,43 @@ class PostShow extends React.Component {
 var styles = StyleSheet.create({
   thing: {
     alignSelf: 'center',
-    padding: 20,
-    paddingTop: 50,
+    paddingLeft: 20,
+    paddingRight: 20,
     width: screenHeight * 0.5,
     height: screenHeight * 0.1,
     borderColor: 'gray', 
     borderWidth: 1
   },
+  footer: {
+    flex: 0.2,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  welcomePage: {
+    flex: 0.8
+  },
+  text: {
+    color: 'white'
+  },
+  header: {
+    fontSize: 25,
+    margin: 5,
+    color: 'white',
+    fontFamily: 'Roboto-Bold'
+  },
+  container: {
+    padding: 30,
+    marginTop: 65,
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    flex: 1
+  },
+  title: {
+    fontSize: 20,
+    marginBottom: 10
+  }
 });
 
 module.exports = PostShow;

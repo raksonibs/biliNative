@@ -66,7 +66,8 @@ class WelcomePage extends Component {
   render() {
     return (
       <View style={styles.container}>
-               
+        <Text>Supports French, Spanish, and English!</Text>     
+        <Text>Click below for articles, music, and books!</Text> 
       </View>
     );
   }

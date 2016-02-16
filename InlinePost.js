@@ -35,15 +35,15 @@ class InlinePost extends React.Component {
 
   render() {
     return (
-      <View style={styles.thing}>
-       <TouchableHighlight style={styles.button}
-          underlayColor='#99d9f4'
-          onPress={this.handleButtonPress.bind(this)}
-          type='music'
-          >
+      <TouchableHighlight style={styles.button}
+        underlayColor='#99d9f4'
+        onPress={this.handleButtonPress.bind(this)}
+        type='music'
+      >
+        <View style={styles.thing}>
           <Text style={styles.buttonText}>{this.props.post.title}</Text>
-        </TouchableHighlight>
-      </View>
+        </View>
+      </TouchableHighlight>
     );
   }
 }

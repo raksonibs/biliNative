@@ -9,11 +9,15 @@ var {
   TouchableElement,
   StyleSheet,
   Dimensions,
-  Image
+  Image,
+  View,
+  ScrollView
 } = React;
 
 let screenHeight = Dimensions.get('window').height;
 var InlinePost = require('./InlinePost')
+var Footer = require('./Footer');
+
 
 class PostPage extends React.Component {
   constructor(props) {
@@ -26,7 +30,7 @@ class PostPage extends React.Component {
 
   render() {
     return (
-      <View style={styles.thing}>
+      <ScrollView style={styles.thing}>
         <View>
           {
             this.props.posts.map((post, index) => {
@@ -34,7 +38,7 @@ class PostPage extends React.Component {
             })
           }
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

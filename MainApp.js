@@ -9,7 +9,8 @@ var {
   TouchableHighlight,
   ActivityIndicatorIOS,
   Image,
-  Component
+  Component,
+  ScrollView
 } = React;
 
 var WelcomePage = require('./WelcomePage');
@@ -23,8 +24,12 @@ class MainApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <WelcomePage style={{flex: 0.8}} navigator={this.props.navigator} />
-        <Footer style={{flex: 0.2}} navigator={this.props.navigator} />
+        <ScrollView>
+          <WelcomePage style={styles.welcomePage} navigator={this.props.navigator} />
+        </ScrollView>
+        <View>
+          <Footer style={styles.footer} navigator={this.props.navigator} />
+        </View>
       </View>
     );
   }
@@ -36,6 +41,16 @@ var styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     color: 'white'
+  },
+  footer: {
+    flex: 0.2,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  welcomePage: {
+    flex: 0.8
   },
   text: {
     color: 'white'
