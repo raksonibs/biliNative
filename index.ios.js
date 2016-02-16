@@ -9,7 +9,8 @@ var {
   ScrollView,
   Navigator,
   TouchableHighlight,
-  Component
+  Component,
+  TabBarIOS
 } = React;
 
 import {
@@ -21,6 +22,28 @@ import {
   getTheme,
   setTheme,
 } from 'react-native-material-kit';
+
+var NavigationBarRouteMapper = {
+  LeftButton: function(route, navigator, index, navState) {
+    return (<TouchableHighlight onPress={() => {
+      if (index > 0) {
+        navigator.pop()
+
+      }
+    }}>
+      <Text> Back </Text>
+    </TouchableHighlight>
+  )
+  },
+  RightButton: function(route, navigator, index, navState) {
+    return null
+  },
+  Title: function(route, navigator, index, navState) {
+    return (
+      <Text> {route.name} </Text>
+    )
+  }
+}
 
 // customize the material design theme
 setTheme({
@@ -43,38 +66,61 @@ var styles = StyleSheet.create({
   }
 });
 
+var Page = React.createClass({
+  render: function() {
+    return (
+      <View style={{marginTop: 80}}>
+        <TouchableHighlight onPress={() => {
+          var nextIndex = this.props.index + 1;
+
+          this.props.navigator.push({
+            name: "Scene " + nextIndex,
+            index: nextIndex
+          })
+        }}>
+          <Text> Next </Text>
+        </TouchableHighlight>
+      </View>
+    )
+
+  }
+})
 
 class biliNative extends Component {
   constructor(props) {
     super(props);    
     component = this;
     this.state = {
+      selectedTab: 'pg1'
     }
   }
   // want to hide nav only at bottom
   render() {
     return (
       <View style={styles.container}>
-        <Navigator
-          initialRoute={{name: 'BiLi', index: 0}}
-          renderScene={(route, navigator) =>
-            <MainApp
-              name={route.name}
-              onForward={() => {
-                var nextIndex = route.index + 1;
-                navigator.push({
-                  name: 'Scene ' + nextIndex,
-                  index: nextIndex,
-                });
-              }}
-              onBack={() => {
-                if (route.index > 0) {
-                  navigator.pop();
-                }
-              }}
-            />
-          }
-        />  
+        <Navigator initialRoute={{name: 'Outer', index: 0}}
+          renderScene={(route, navigator) => {
+            return (
+              <TabBarIOS selectedTab={this.state.selectedTab}>
+                <TabBarIOS.Item
+                  title="Page 1"
+                  selected={this.state.selectedTab === 'pg1'}
+                  onPress={() => {
+                    this.setState({
+                      selectedTab: 'pg1'
+                    })
+                  }}
+                  <Navigator initialRoute={{name: "First", index:0}}
+                    renderScene={(route, navigator) => {
+                      return <Page navigator={navigator} name={route.name} index={route.index} />                      
+                    }}
+                    navigatonBar={
+                      <Navigator.NavigationBar routerMapper={NavigationBarRouteMapper} /> 
+                    }
+                  />
+                </TabBarIOS.Item>
+            )
+          }}
       </View>
     );
   }
