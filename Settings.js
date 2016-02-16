@@ -17,6 +17,10 @@ let screenHeight = Dimensions.get('window').height;
 class Settings extends React.Component {
   constructor(props) {
     super(props)
+    let clickedBut = this.props.clicked ? true : false
+    this.state = {
+      clicked: clickedBut
+    }
   }
 
   goBack() {

@@ -10,7 +10,7 @@ var {
   ActivityIndicatorIOS,
   Image,
   Component,
-  NavigatorIOS,
+  Navigator,
   TouchableOpacity
 } = React;
 
@@ -169,7 +169,7 @@ class Footer extends Component {
     this.props.navigator.push({
       title: "Settings",
       component: Settings,
-      passProps: {navigator: this.props.navigator}
+      passProps: {navigator: this.props.navigator, clicked: true}
     });
   }
 
