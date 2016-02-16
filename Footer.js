@@ -85,34 +85,33 @@ var styles = StyleSheet.create({
   },
 });
 
-const ColoredRaisedButton = MKButton.coloredButton()
-  .withText('BUTTON')
-  .withOnPress(() => {
-    console.log("Hi, it's a colored button!");
+const AccentColoredFlatButtonBooks = MKButton.accentColoredFlatButton()
+  .withText('Books')
+  .withTextStyle({
+    color: MKColor.Teal,
+    fontWeight: 'bold',
   })
   .build();
-const AccentColoredRaisedButton = MKButton.accentColoredButton()
+const AccentColoredFlatButtonArticles = MKButton.accentColoredFlatButton()
+  .withText('Articles')
+  .withTextStyle({
+    color: MKColor.Teal,
+    fontWeight: 'bold',
+  })
   .build();
-const PlainRaisedButton = MKButton.button()
-  .withText('BOOKS')
+const AccentColoredFlatButtonSettings = MKButton.accentColoredFlatButton()
+  .withText('Settings')
+  .withTextStyle({
+    color: MKColor.Teal,
+    fontWeight: 'bold',
+  })
   .build();
-const FlatButton = MKButton.flatButton()
-  .withText('BUTTON')
-  .build();
-const ColoredFlatButton = MKButton.coloredFlatButton()
-  .withText('BUTTON')
-  .build();
-const AccentColoredFlatButton = MKButton.accentColoredFlatButton()
-  .withText('BUTTON')
-  .build();
-const ColoredFab = MKButton.coloredFab()
-  .withStyle(styles.fab)
-  .build();
-const AccentColoredFab = MKButton.accentColoredFab()
-  .withStyle(styles.fab)
-  .build();
-const PlainFab = MKButton.plainFab()
-  .withStyle(styles.fab)
+const AccentColoredFlatButtonMusic = MKButton.accentColoredFlatButton()
+  .withText('Music')
+  .withTextStyle({
+    color: MKColor.Teal,
+    fontWeight: 'bold',
+  })
   .build();
 
 var REQUEST_URL = 'http://localhost:3000/posts/';
@@ -219,10 +218,10 @@ class Footer extends Component {
     return (
       <View style={styles.container}>
         {spinner}  
-        <PlainRaisedButton onPress={this.handleButtonPress.bind(this, 'books')}/>
-        <PlainRaisedButton onPress={this.handleButtonPress.bind(this, 'articles')}/>
-        <PlainRaisedButton onPress={this.handleButtonPress.bind(this, 'music')}/>
-        <PlainRaisedButton onPress={this.handleButtonPress.bind(this, 'settings')}/>
+        <AccentColoredFlatButtonBooks style={{flex: 0.2}} onPress={this.handleButtonPress.bind(this, 'books')}/>
+        <AccentColoredFlatButtonArticles style={{flex: 0.2}} onPress={this.handleButtonPress.bind(this, 'articles')}/>
+        <AccentColoredFlatButtonMusic style={{flex: 0.2}} onPress={this.handleButtonPress.bind(this, 'music')}/>
+        <AccentColoredFlatButtonSettings style={{flex: 0.2}} onPress={this.handleButtonPress.bind(this, 'settings')}/>
         <Text style={styles.description}>{this.state.message}</Text>
       </View>
     );

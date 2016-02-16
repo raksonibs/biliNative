@@ -23,8 +23,8 @@ class MainApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <WelcomePage navigator={this.props.navigator} />
-        <Footer navigator={this.props.navigator} />
+        <WelcomePage style={{flex: 0.8}} navigator={this.props.navigator} />
+        <Footer style={{flex: 0.2}} navigator={this.props.navigator} />
       </View>
     );
   }
